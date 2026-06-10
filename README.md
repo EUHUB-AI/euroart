@@ -1,10 +1,107 @@
 # EUROART — one-page website
 
-Static one-page site for the EUROART advertising agency (graphic design, print and publications since 1997). No build step — plain HTML/CSS/JS, ready for any static host (GitHub Pages, Netlify, …).
+A one-page scrolling website for **EUROART**, a Slovak advertising agency working in computer graphics and publishing since 1997. The agency designs and produces promotional and informational print — leaflets, calendars, cycling maps, brochures, books and monographs — primarily for municipalities, towns, educational institutions, civic associations and micro-regions, and also offers accounting services.
+
+The site is a static build (plain HTML/CSS/JS, no framework, no build step) implemented from a [Claude Design](https://claude.ai/design) prototype. It is ready for any static host: Cloud Storage, GitHub Pages, Netlify, etc.
+
+## Goals
+
+- **Present the agency** and its track record (since 1997, award-winning publications) in a modern, cozy way that still feels like a print-and-craft studio.
+- **Showcase the brand imagery**: the agency's grey "chalk sketch" photo series (hand-drawn chalk concepts held by real hands) is the visual backbone of every section.
+- **Convert visitors into meetings** — every path leads to the contact section ("Dohodnite si stretnutie" / "Book a meeting"); the first consultation is free.
+- **Serve two audiences**: Slovak is the primary language with a full English translation behind an SK/EN toggle.
+
+## Page structure
+
+One scrolling page with a sticky, blurred header. Sections in order:
+
+| # | Section (SK) | Anchor | Content |
+| --- | --- | --- | --- |
+| 1 | Intro | `#top` | Full-width hero panel on the falling-cubes image, headline with a hand-written sub-line, floating paper-plane accent, two CTAs |
+| 2 | O nás | `#about` | Agency story, "Čo pre Vás môžeme urobiť?" pitch, badge chips (1997 → today, EIZO · Canon EOS, target clients), marionette sketch |
+| 3 | Služby | `#services` | Five services in an accordion (Grafický dizajn, Redakčné práce, Fotografia, Výroba web-stránok, Doplnkové reklamné služby) next to a sticky idea-board sketch |
+| 4 | Naša ponuka | `#offer` | What the agency prints, in three tabs (Firemné tlačoviny / Tlačoviny pre inštitúcie / Tlačoviny pre obce a mestá) plus an awards grid of six prize-winning publications |
+| 5 | Účtovníctvo | `#accounting` | Deep-blue band describing the bookkeeping services, with a CTA card ("first consultation is free") |
+| 6 | Kontakt | `#contact` | Contact rows (e-mail, phone, address), coffee-cup sketch, and a contact form with a sent-state |
+| — | Footer | | Logo, tagline, rights |
+
+## Design
+
+### Brand & visual language
+
+- **Logo**: an isometric cube in brand yellow + two blues (inline SVG, `index.html`), wordmark "EURO" (blue) + "ART" (ink).
+- **Palette**: brand yellow `#FFD500` and EUROART blue `#1B3FA0` / deep blue `#16337F` over warm paper neutrals.
+- **Typography** (Google Fonts):
+  - *Bricolage Grotesque* — headings, expressive and modern;
+  - *Figtree* — body text and UI;
+  - *Caveat* — the "hand-written" accent lines (e.g. "… my vieme, ako na to!"), slightly rotated (−1°) for a chalk-on-board feel.
+- **Shape language**: large rounded corners (`--r-lg: 22px`, `--r: 14px`), pill buttons and chips, soft long-throw shadows.
+
+### The duotone hover effect
+
+The signature interaction. Every grey chalk image cross-fades into a **blue→yellow duotone** version of itself on hover ("naše farby ✦" tooltip appears). Implementation:
+
+- A reusable SVG filter `#ea-duotone` is defined once at the top of `index.html`: a luminance `feColorMatrix` followed by an `feComponentTransfer` mapping shadows→deep blue and highlights→yellow.
+- Each `figure.sketch` holds the grey `<img>` plus an absolutely positioned duplicate inside `.duo` with `filter: url(#ea-duotone)`; hovering fades `.duo` from 0 to 1 and gently zooms the image.
+- The filter is intentionally portable — apply `filter="url(#ea-duotone)"` to any `<image>` inside an SVG, or `filter: url(#ea-duotone)` in CSS, to reuse the effect elsewhere.
+- Global override classes on `<body>`: `img-hover` (default, duotone on hover), `img-color` (always duotone), `img-grey` (never).
+
+### Themes
+
+Three complete looks were explored during the design phase; all are kept in `css/style.css` as CSS-variable sets, switched by `data-theme` on `<html>`:
+
+| Theme | Value | Look |
+| --- | --- | --- |
+| **Galéria** (default) | `galeria` | Light, warm paper background — cozy gallery feel |
+| Krieda | `krieda` | Dark chalkboard greys with brightened blues |
+| Split | `split` | Pure white page with alternating dark-grey bands (`.sec-grey`) echoing the photo backdrops |
+
+Only `data-theme` needs to change — every component reads the variables (`--bg`, `--ink`, `--muted`, `--blue`, `--surface`, `--line`, …).
+
+### Motion
+
+- **Scroll reveal**: elements with class `.rv` fade/slide in when entering the viewport. Implemented with `requestAnimationFrame` + `getBoundingClientRect` (no IntersectionObserver — chosen for reliability in embedded webviews).
+- **Floating paper plane** in the hero and on the form's sent-state (`@keyframes float`).
+- Accordion, tabs, buttons and cards have soft 0.2–0.5 s transitions.
+- All non-essential motion is disabled under `prefers-reduced-motion`, and can be force-disabled with the `no-motion` class on `<body>`.
+
+## Architecture
+
+| Path | Purpose |
+| --- | --- |
+| `index.html` | All markup. Static skeleton with `data-i18n="path.to.key"` attributes for translatable text and `data-*` mount points for JS-rendered lists. Contains the `#ea-duotone` SVG filter and the inline logo SVGs. |
+| `css/style.css` | Full design system: theme variable sets, header, hero, sections, sketch/duotone, accordion, tabs, awards, accounting band, contact form, footer, reveal animations, responsive rules. |
+| `js/content.js` | **All copy lives here** — `window.EUROART_I18N` with complete `sk` and `en` trees (nav, hero, about, services, offer incl. tabs and awards, accounting, contact incl. form strings, footer). Edit text here, not in the HTML. |
+| `js/main.js` | Behaviour: language toggle (persisted to `localStorage` as `euroart-lang`), i18n application, accordion/tabs/awards rendering from the content tree, contact-form sent-state, scroll reveal. No dependencies. |
+| `assets/` | Web-optimized imagery (see below). |
+| `deploy/bootstrap-gcp.sh` | Interactive GCP deployment setup (see Deploying). |
+
+The design prototype was React-based; the production implementation deliberately re-creates the same visual output in dependency-free vanilla JS (~200 lines) since a one-page marketing site needs no framework runtime.
+
+### Internationalisation
+
+- `index.html` ships language-neutral; `js/main.js` fills every `[data-i18n]` element from `EUROART_I18N[lang]` on load and on toggle.
+- Dynamic blocks (services accordion, offer tabs, awards) re-render on language switch.
+- `<html lang>` is kept in sync; the choice persists across visits via `localStorage`.
+- Adding a language = adding one more top-level tree in `js/content.js` plus a button in the header `.lang` group.
+
+### Imagery
+
+All images live in `assets/`, downscaled to ≤1600 px and recompressed (60–110 KB each) from 6000×4000 originals.
+
+**Currently used on the page:** `cubes-web.png` (hero), `marionette-web.png` (O nás), `idea-web.png` (Služby), `phone-web.png` (Naša ponuka), `coffee-web.png` (Kontakt), `plane.png` (hero + form sent-state accent).
+
+**Available, not yet placed** (the wider 3:2 chalk-series shots): `brain-web.jpg`, `marionette-wide-web.jpg`, `cubes-wide-web.jpg`, `coffee-wide-web.jpg`, `hammer-money-web.jpg`, `bulb-handover-web.jpg`, `bulb-handover-2-web.jpg`, `ideas-web.jpg`, `phone-wide-web.jpg`, `graphs-web.jpg`, `money-web.jpg`, `money-2-web.jpg`, `globe-wide-web.jpg`.
+
+### Accessibility
+
+- Semantic landmarks (`header`/`nav`/`main`/`section`/`footer`), labelled controls (`aria-label`, `aria-expanded` on the accordion, `role="tablist"`/`tab` + `aria-selected` on tabs).
+- Keyboard-reachable interactive elements (real `<button>`/`<a>`), visible focus rings on form fields.
+- Reduced-motion support as described above; decorative images carry empty `alt`.
 
 ## Run locally
 
-Open `index.html` in a browser, or serve the folder:
+Open `index.html` directly, or serve the folder:
 
 ```sh
 python3 -m http.server 8000
@@ -12,28 +109,6 @@ python3 -m http.server 8000
 ```
 
 (Serving is recommended — the language preference uses `localStorage`, which some browsers restrict on `file://`.)
-
-## Structure
-
-| Path | Purpose |
-| --- | --- |
-| `index.html` | Page markup, sections: Intro, O nás, Služby, Naša ponuka, Účtovníctvo, Kontakt |
-| `css/style.css` | All styles, including the three theme variants |
-| `js/content.js` | All copy in Slovak and English (`window.EUROART_I18N`) — edit text here |
-| `js/main.js` | SK/EN toggle, services accordion, offer tabs, contact form, scroll-reveal |
-| `assets/` | Brand chalk-sketch imagery (web-sized) |
-
-## Features
-
-- **SK / EN toggle** in the header; the choice is remembered in `localStorage`.
-- **Blue→yellow duotone hover**: grey chalk images cross-fade into the EUROART palette on hover. The effect is a reusable SVG filter (`#ea-duotone`, defined at the top of `index.html`) — apply `filter: url(#ea-duotone)` to any element or `<image>` inside an SVG.
-- **Themes**: the default look is *Galéria* (light). Two alternatives from the design phase are kept in the CSS — switch by changing `data-theme` on `<html>` to `krieda` (dark chalkboard) or `split` (white/grey bands).
-- Image hover behaviour can be forced via a class on `<body>`: `img-hover` (default), `img-color` (always duotone), `img-grey` (never).
-
-## Known placeholders
-
-- Phone and address in the Kontakt section (`js/content.js` → `contact.phone` / `contact.address`).
-- The contact form shows a sent-state only — wire it to a backend or form service before launch.
 
 ## Deploying to GCP
 
@@ -44,3 +119,10 @@ Run the interactive bootstrap script:
 ```
 
 It asks for the path to your service-account JSON key (kept out of the repo; stored as the `GCP_SA_KEY` GitHub Actions secret), the GCP project, bucket name, region and deploy branch — then generates `.github/workflows/deploy-gcp.yml`, which syncs the site to a public Cloud Storage bucket on every push. The service account needs `roles/storage.admin`.
+
+## Known placeholders / pre-launch checklist
+
+- **Phone and address** in the Kontakt section are placeholders (`js/content.js` → `contact.phone` / `contact.address`).
+- **Contact form** shows a client-side sent-state only — wire it to a backend or form service (the submit handler is in `js/main.js`).
+- **Theme choice**: Galéria is live; decide whether Krieda or Split should replace it (one-attribute change).
+- The outdated "Kalendáre a diáre na rok 2021" link from the old site was intentionally dropped during the design phase.
