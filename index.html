@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="sk" data-theme="galeria">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EUROART — reklamná agentúra</title>
+<meta name="description" content="Reklamná agentúra EUROART — grafický dizajn, tlačoviny a publikácie pre obce, mestá, inštitúcie a firmy. Od roku 1997.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="img-hover">
+
+<!-- SVG defs: blue→yellow duotone filter for the chalk-sketch imagery.
+     Reusable: apply filter="url(#ea-duotone)" to any <image> inside an SVG,
+     or filter: url(#ea-duotone) in CSS. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="ea-duotone" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0.2126 0.7152 0.0722 0 0  0 0 0 1 0"></feColorMatrix>
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues="0.055 0.106 0.239 0.867 1"></feFuncR>
+        <feFuncG type="table" tableValues="0.169 0.247 0.388 0.902 0.835"></feFuncG>
+        <feFuncB type="table" tableValues="0.451 0.627 0.788 0.961 0"></feFuncB>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+</svg>
+
+<header class="header">
+  <div class="header-in">
+    <a class="logo" href="#top" aria-label="EUROART">
+      <svg width="30" height="30" viewBox="0 0 100 100" aria-hidden="true">
+        <polygon points="50,4 92,26 50,48 8,26" fill="#FFD500"></polygon>
+        <polygon points="8,26 50,48 50,96 8,74" fill="#1B3FA0"></polygon>
+        <polygon points="92,26 92,74 50,96 50,48" fill="#16337F"></polygon>
+      </svg>
+      <span class="logo-word"><b>EURO</b><span>ART</span></span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about" data-i18n="nav.about"></a>
+      <a href="#services" data-i18n="nav.services"></a>
+      <a href="#offer" data-i18n="nav.offer"></a>
+      <a href="#accounting" data-i18n="nav.accounting"></a>
+      <a href="#contact" data-i18n="nav.contact"></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="sk">SK</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+    <a class="btn btn-yellow btn-sm" href="#contact" data-i18n="nav.contact"></a>
+  </div>
+</header>
+
+<main>
+  <!-- Hero / Intro -->
+  <div class="hero wrap" id="top">
+    <div class="hero-panel rv">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="assets/cubes-web.png" alt="">
+        <div class="duo"><img src="assets/cubes-web.png" alt=""></div>
+      </div>
+      <img class="plane" src="assets/plane.png" alt="">
+      <div class="hero-content">
+        <span class="kicker"><span class="dot"></span><span data-i18n="hero.kicker"></span></span>
+        <h1>
+          <span data-i18n="hero.line1"></span>
+          <span class="hand" data-i18n="hero.line2"></span>
+        </h1>
+        <p class="hero-lead" data-i18n="hero.lead"></p>
+        <div class="hero-ctas">
+          <a class="btn btn-yellow" href="#contact" data-i18n="hero.cta"></a>
+          <a class="btn btn-ghost" href="#services" data-i18n="hero.cta2"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- O nás / About -->
+  <section class="sec" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="sec-head rv">
+          <span class="sec-eyebrow" data-i18n="about.title"></span>
+          <h2>
+            <span data-i18n="about.line1"></span>
+            <span class="hand" data-i18n="about.line2"></span>
+          </h2>
+        </div>
+        <div class="sec-body rv">
+          <p class="muted" data-i18n="about.p1"></p>
+          <p class="muted" data-i18n="about.p2"></p>
+          <p class="about-q" data-i18n="about.q"></p>
+          <p class="muted"><span data-i18n="about.p3"></span> <b class="ink" data-i18n="about.p4"></b></p>
+          <div class="about-badges">
+            <span class="chip"><b>1997</b> → <span data-year></span></span>
+            <span class="chip">EIZO · Canon EOS</span>
+            <span class="chip">Obce · mestá · inštitúcie</span>
+          </div>
+        </div>
+      </div>
+      <figure class="sketch rv" style="aspect-ratio: 1537 / 1600">
+        <img src="assets/marionette-web.png" alt="">
+        <div class="duo" aria-hidden="true"><img src="assets/marionette-web.png" alt=""></div>
+        <span class="sketch-tip" data-tip></span>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Služby / Services -->
+  <section class="sec sec-alt sec-grey" id="services">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="sec-eyebrow" data-i18n="services.title"></span>
+        <h2>
+          <span data-i18n="services.line1"></span>
+          <span class="hand" data-i18n="services.line2"></span>
+        </h2>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-figure">
+          <figure class="sketch rv" style="aspect-ratio: 1537 / 1600">
+            <img src="assets/idea-web.png" alt="">
+            <div class="duo" aria-hidden="true"><img src="assets/idea-web.png" alt=""></div>
+            <span class="sketch-tip" data-tip></span>
+          </figure>
+        </div>
+        <div class="svc-list" data-services></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Naša ponuka / Offer -->
+  <section class="sec" id="offer">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="sec-eyebrow" data-i18n="offer.title"></span>
+        <h2>
+          <span data-i18n="offer.line1"></span>
+          <span class="hand" data-i18n="offer.line2"></span>
+        </h2>
+      </div>
+      <div class="sec-body rv" style="max-width: 720px">
+        <p class="muted" data-i18n="offer.p1"></p>
+        <p class="muted" data-i18n="offer.p2"></p>
+      </div>
+      <h3 class="offer-q rv" data-i18n="offer.q"></h3>
+      <div class="offer-grid">
+        <div>
+          <div class="tabs rv" role="tablist" data-tabs></div>
+          <div class="offer-items rv" data-tab-items></div>
+        </div>
+        <figure class="sketch rv" style="aspect-ratio: 1537 / 1600">
+          <img src="assets/phone-web.png" alt="">
+          <div class="duo" aria-hidden="true"><img src="assets/phone-web.png" alt=""></div>
+          <span class="sketch-tip" data-tip></span>
+        </figure>
+      </div>
+      <div class="awards">
+        <h3 class="rv">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="9" r="6" fill="var(--yellow)"></circle>
+            <path d="M8.5 13.5 6.5 21l5.5-2.6L17.5 21l-2-7.5" fill="var(--blue)"></path>
+            <path d="M9.6 9.2 11.4 11l3-3.4" stroke="#1C2333" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+          </svg>
+          <span data-i18n="offer.awardsTitle"></span>
+        </h3>
+        <div class="awards-grid" data-awards></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Účtovníctvo / Accounting -->
+  <section class="sec acct" id="accounting">
+    <div class="wrap acct-grid">
+      <div>
+        <div class="sec-head rv">
+          <span class="sec-eyebrow" data-i18n="accounting.title"></span>
+          <h2>
+            <span data-i18n="accounting.line1"></span>
+            <span class="hand" data-i18n="accounting.line2"></span>
+          </h2>
+        </div>
+        <div class="sec-body rv">
+          <p class="muted" data-i18n="accounting.p1"></p>
+          <p class="muted" data-i18n="accounting.p2"></p>
+        </div>
+      </div>
+      <div class="acct-card rv">
+        <span class="hand" data-i18n="accounting.cta"></span>
+        <a class="btn btn-yellow" href="#contact" data-acct-btn></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt / Contact -->
+  <section class="sec sec-alt sec-grey" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="sec-head rv">
+          <span class="sec-eyebrow" data-i18n="contact.title"></span>
+          <h2>
+            <span data-i18n="contact.line1"></span>
+            <span class="hand" data-i18n="contact.line2"></span>
+          </h2>
+        </div>
+        <div class="c-details rv">
+          <a class="c-row" href="mailto:hello@euhub.co" data-mailto>
+            <span class="c-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"></rect><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </span>
+            <span><small data-i18n="contact.emailLabel"></small><b data-i18n="contact.email"></b></span>
+          </a>
+          <div class="c-row">
+            <span class="c-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg>
+            </span>
+            <span><small data-i18n="contact.phoneLabel"></small><b data-i18n="contact.phone"></b></span>
+          </div>
+          <div class="c-row">
+            <span class="c-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z" stroke="currentColor" stroke-width="1.8"></path><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.8"></circle></svg>
+            </span>
+            <span><small data-i18n="contact.addressLabel"></small><b class="muted" style="font-weight: 600" data-i18n="contact.address"></b></span>
+          </div>
+        </div>
+        <div style="margin-top: 24px">
+          <figure class="sketch rv" style="aspect-ratio: 16 / 10">
+            <img src="assets/coffee-web.png" alt="" style="object-position: 70% 74%">
+            <div class="duo" aria-hidden="true"><img src="assets/coffee-web.png" alt="" style="object-position: 70% 74%"></div>
+            <span class="sketch-tip" data-tip></span>
+          </figure>
+        </div>
+      </div>
+      <form class="form rv" data-form novalidate>
+        <div class="form-grid" data-form-fields>
+          <div class="field"><label for="f-name" data-i18n="contact.form.name"></label><input id="f-name" name="name" required autocomplete="name"></div>
+          <div class="field"><label for="f-mail" data-i18n="contact.form.email"></label><input id="f-mail" name="email" type="email" required autocomplete="email"></div>
+          <div class="field full"><label for="f-msg" data-i18n="contact.form.message"></label><textarea id="f-msg" name="message" rows="5" required></textarea></div>
+          <div class="full"><button class="btn btn-yellow" type="submit"><span data-i18n="contact.form.send"></span> ✈</button></div>
+        </div>
+        <div class="sent" data-form-sent hidden>
+          <img class="sent-ico" src="assets/plane.png" alt="">
+          <h3 data-i18n="contact.form.sentTitle"></h3>
+          <p data-i18n="contact.form.sentBody"></p>
+          <button type="button" class="btn btn-blue" data-form-again data-i18n="contact.form.again"></button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-in">
+    <a class="logo" href="#top" aria-label="EUROART">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <polygon points="50,4 92,26 50,48 8,26" fill="#FFD500"></polygon>
+        <polygon points="8,26 50,48 50,96 8,74" fill="#1B3FA0"></polygon>
+        <polygon points="92,26 92,74 50,96 50,48" fill="#16337F"></polygon>
+      </svg>
+      <span class="logo-word logo-word-sm"><b>EURO</b><span>ART</span></span>
+    </a>
+    <span class="muted" data-i18n="footer.tagline"></span>
+    <span class="footer-right" data-i18n="footer.rights"></span>
+  </div>
+</footer>
+
+<script src="js/content.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
