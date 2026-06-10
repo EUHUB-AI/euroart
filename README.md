@@ -34,3 +34,13 @@ python3 -m http.server 8000
 
 - Phone and address in the Kontakt section (`js/content.js` → `contact.phone` / `contact.address`).
 - The contact form shows a sent-state only — wire it to a backend or form service before launch.
+
+## Deploying to GCP
+
+Run the interactive bootstrap script:
+
+```sh
+./deploy/bootstrap-gcp.sh
+```
+
+It asks for the path to your service-account JSON key (kept out of the repo; stored as the `GCP_SA_KEY` GitHub Actions secret), the GCP project, bucket name, region and deploy branch — then generates `.github/workflows/deploy-gcp.yml`, which syncs the site to a public Cloud Storage bucket on every push. The service account needs `roles/storage.admin`.
