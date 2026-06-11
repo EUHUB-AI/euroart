@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1537 1600" role="img" aria-label="Chalk coffee cup with animated vapor">
+  <defs>
+    <linearGradient id="vaporGoldBlue" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#FFD500"/>
+      <stop offset="0.52" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#1B3FA0"/>
+    </linearGradient>
+    <linearGradient id="vaporBlueGold" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#1B3FA0"/>
+      <stop offset="0.45" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#FFD500"/>
+    </linearGradient>
+    <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0.08  0 1 0 0 0.18  0 0 1 0 0.55  0 0 0 0.78 0" result="blueGlow"/>
+      <feMerge>
+        <feMergeNode in="blueGlow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .photo { pointer-events: none; }
+      .vapor-line {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 320 220;
+        animation: rise 4.8s ease-in-out infinite;
+        transform-box: fill-box;
+        transform-origin: center bottom;
+      }
+      .vapor-line.fast { animation-duration: 3.7s; }
+      .vapor-line.slow { animation-duration: 5.9s; }
+      .vapor-glow {
+        opacity: .55;
+        stroke-width: 19;
+        filter: url(#softGlow);
+      }
+      .vapor-core {
+        opacity: .92;
+        stroke-width: 7;
+      }
+      .spark {
+        animation: sparkle 2.8s ease-in-out infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+      .spark.s2 { animation-delay: .8s; }
+      .spark.s3 { animation-delay: 1.6s; }
+      @keyframes rise {
+        0% { opacity: 0; stroke-dashoffset: 240; transform: translateY(34px) scale(.96); }
+        18% { opacity: .95; }
+        64% { opacity: .75; }
+        100% { opacity: 0; stroke-dashoffset: -210; transform: translateY(-72px) scale(1.07); }
+      }
+      @keyframes sparkle {
+        0%, 100% { opacity: 0; transform: translateY(10px) scale(.35) rotate(0deg); }
+        45% { opacity: .95; transform: translateY(-8px) scale(1) rotate(24deg); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .vapor-line, .spark { animation: none; opacity: .75; }
+      }
+    </style>
+  </defs>
+
+  <image class="photo" href="coffee-web.png" x="0" y="0" width="1537" height="1600" preserveAspectRatio="xMidYMid slice"/>
+
+  <g filter="url(#softGlow)">
+    <path class="vapor-line slow vapor-glow" stroke="url(#vaporGoldBlue)" d="M1112 1009 C1030 906 1046 807 1111 714 C1162 641 1168 574 1116 508 C1215 563 1233 672 1172 759 C1119 835 1125 911 1200 1002"/>
+    <path class="vapor-line vapor-glow" stroke="url(#vaporBlueGold)" d="M1244 1011 C1344 908 1319 808 1261 734 C1216 675 1217 607 1265 558 C1371 624 1394 749 1328 842 C1278 914 1298 963 1349 1019"/>
+    <path class="vapor-line fast vapor-glow" stroke="url(#vaporGoldBlue)" d="M1034 1018 C986 932 1003 860 1047 795 C1081 745 1087 704 1057 668 C1126 702 1148 772 1106 839 C1069 899 1083 958 1133 1016"/>
+  </g>
+
+  <g>
+    <path class="vapor-line slow vapor-core" stroke="#ffffff" d="M1112 1009 C1030 906 1046 807 1111 714 C1162 641 1168 574 1116 508 C1215 563 1233 672 1172 759 C1119 835 1125 911 1200 1002"/>
+    <path class="vapor-line vapor-core" stroke="#FFD500" d="M1244 1011 C1344 908 1319 808 1261 734 C1216 675 1217 607 1265 558 C1371 624 1394 749 1328 842 C1278 914 1298 963 1349 1019"/>
+    <path class="vapor-line fast vapor-core" stroke="#1B3FA0" d="M1034 1018 C986 932 1003 860 1047 795 C1081 745 1087 704 1057 668 C1126 702 1148 772 1106 839 C1069 899 1083 958 1133 1016"/>
+  </g>
+
+  <g fill="#FFD500">
+    <path class="spark" d="M1129 408 1140 438 1170 449 1140 460 1129 490 1118 460 1088 449 1118 438Z"/>
+    <path class="spark s2" d="M1268 476 1276 497 1297 505 1276 513 1268 534 1260 513 1239 505 1260 497Z"/>
+    <path class="spark s3" fill="#1B3FA0" d="M1031 596 1038 615 1057 622 1038 629 1031 648 1024 629 1005 622 1024 615Z"/>
+  </g>
+</svg>
