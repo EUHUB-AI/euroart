@@ -10,6 +10,35 @@ window.EUROART_I18N = {
       cta: "Dohodnite si stretnutie",
       cta2: "Pozrite si naše služby"
     },
+    visuals: {
+      process: {
+        think: "Premyslíme",
+        idea: "Navrhneme",
+        design: "Dizajnujeme",
+        produce: "Vyrobíme"
+      },
+      about: {
+        handover: "Nápad odovzdaný do praxe",
+        tailored: "Nie šablóna, ale riešenie na mieru"
+      },
+      offer: {
+        web: "Web a digitálne výstupy",
+        region: "Obce, mestá a regióny",
+        production: "Tlač a produkcia",
+        meeting: "Stretnutie pri káve"
+      },
+      accounting: {
+        reports: "Prehľadné výkazy",
+        cashflow: "Daňové povinnosti",
+        documents: "Účtovné doklady",
+        deadlines: "Termíny pod kontrolou"
+      },
+      contact: {
+        coffee: "Káva a prvý rozhovor",
+        consultation: "Bezplatná konzultácia",
+        message: "Rýchla správa"
+      }
+    },
     about: {
       title: "O nás",
       line1: "Vy viete, čo potrebujete,",
@@ -155,6 +184,35 @@ window.EUROART_I18N = {
       lead: "Graphic design, print and publications for towns, municipalities, institutions and businesses.",
       cta: "Book a meeting",
       cta2: "See our services"
+    },
+    visuals: {
+      process: {
+        think: "Think",
+        idea: "Shape",
+        design: "Design",
+        produce: "Produce"
+      },
+      about: {
+        handover: "Ideas handed over to practice",
+        tailored: "Not a template, but tailor-made"
+      },
+      offer: {
+        web: "Web and digital outputs",
+        region: "Towns, municipalities and regions",
+        production: "Print and production",
+        meeting: "Meeting over coffee"
+      },
+      accounting: {
+        reports: "Clear reports",
+        cashflow: "Tax obligations",
+        documents: "Accounting documents",
+        deadlines: "Deadlines under control"
+      },
+      contact: {
+        coffee: "Coffee and the first conversation",
+        consultation: "Free consultation",
+        message: "Quick message"
+      }
     },
     about: {
       title: "About us",

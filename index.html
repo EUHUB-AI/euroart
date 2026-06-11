@@ -77,6 +77,25 @@
     </div>
   </div>
 
+  <section class="visual-strip wrap" aria-label="EUROART process">
+    <figure class="visual-tile rv">
+      <img src="assets/brain-web.jpg" alt="" loading="lazy" decoding="async">
+      <figcaption data-i18n="visuals.process.think"></figcaption>
+    </figure>
+    <figure class="visual-tile rv">
+      <img src="assets/bulb-handover-web.jpg" alt="" loading="lazy" decoding="async">
+      <figcaption data-i18n="visuals.process.idea"></figcaption>
+    </figure>
+    <figure class="visual-tile rv">
+      <img src="assets/ideas-web.jpg" alt="" loading="lazy" decoding="async">
+      <figcaption data-i18n="visuals.process.design"></figcaption>
+    </figure>
+    <figure class="visual-tile rv">
+      <img src="assets/cubes-wide-web.jpg" alt="" loading="lazy" decoding="async">
+      <figcaption data-i18n="visuals.process.produce"></figcaption>
+    </figure>
+  </section>
+
   <!-- O nás / About -->
   <section class="sec" id="about">
     <div class="wrap about-grid">
@@ -97,6 +116,16 @@
             <span class="chip"><b>1997</b> → <span data-year></span></span>
             <span class="chip">EIZO · Canon EOS</span>
             <span class="chip">Obce · mestá · inštitúcie</span>
+          </div>
+          <div class="about-visuals rv" aria-label="EUROART approach">
+            <figure class="mini-photo">
+              <img src="assets/bulb-handover-2-web.jpg" alt="" loading="lazy" decoding="async">
+              <figcaption data-i18n="visuals.about.handover"></figcaption>
+            </figure>
+            <figure class="mini-photo">
+              <img src="assets/marionette-wide-web.jpg" alt="" loading="lazy" decoding="async">
+              <figcaption data-i18n="visuals.about.tailored"></figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -151,9 +180,35 @@
           <div class="tabs rv" role="tablist" data-tabs></div>
           <div class="offer-items rv" data-tab-items></div>
         </div>
-        <figure class="sketch rv" style="aspect-ratio: 1537 / 1600">
-          <img src="assets/phone-web.png" alt="">
-          <div class="duo" aria-hidden="true"><img src="assets/phone-web.png" alt=""></div>
+        <figure class="sketch offer-visual rv" style="aspect-ratio: 1537 / 1600">
+          <img data-offer-visual-img src="assets/phone-wide-web.jpg" alt="" loading="lazy" decoding="async">
+          <div class="duo" aria-hidden="true"><img data-offer-visual-duo src="assets/phone-wide-web.jpg" alt=""></div>
+          <figcaption data-offer-visual-label></figcaption>
+          <span class="sketch-tip" data-tip></span>
+        </figure>
+      </div>
+      <div class="offer-gallery rv" aria-label="Offer examples">
+        <figure class="mini-photo">
+          <img src="assets/phone-web.png" alt="" loading="lazy" decoding="async">
+          <figcaption data-i18n="visuals.offer.web"></figcaption>
+        </figure>
+        <figure class="mini-photo">
+          <img src="assets/globe-wide-web.jpg" alt="" loading="lazy" decoding="async">
+          <figcaption data-i18n="visuals.offer.region"></figcaption>
+        </figure>
+        <figure class="mini-photo">
+          <img src="assets/cubes-wide-web.jpg" alt="" loading="lazy" decoding="async">
+          <figcaption data-i18n="visuals.offer.production"></figcaption>
+        </figure>
+        <figure class="mini-photo">
+          <img src="assets/coffee-wide-web.jpg" alt="" loading="lazy" decoding="async">
+          <figcaption data-i18n="visuals.offer.meeting"></figcaption>
+        </figure>
+      </div>
+      <div class="wide-proof rv">
+        <figure class="sketch" style="aspect-ratio: 16 / 6">
+          <img src="assets/cubes-wide-web.jpg" alt="" loading="lazy" decoding="async">
+          <div class="duo" aria-hidden="true"><img src="assets/cubes-wide-web.jpg" alt=""></div>
           <span class="sketch-tip" data-tip></span>
         </figure>
       </div>
@@ -192,6 +247,24 @@
         <a class="btn btn-yellow" href="#contact" data-acct-btn></a>
       </div>
     </div>
+    <div class="wrap acct-visual-grid rv" aria-label="Accounting visuals">
+      <figure class="acct-photo">
+        <img src="assets/graphs-web.jpg" alt="" loading="lazy" decoding="async">
+        <figcaption data-i18n="visuals.accounting.reports"></figcaption>
+      </figure>
+      <figure class="acct-photo">
+        <img src="assets/money-web.jpg" alt="" loading="lazy" decoding="async">
+        <figcaption data-i18n="visuals.accounting.cashflow"></figcaption>
+      </figure>
+      <figure class="acct-photo">
+        <img src="assets/money-2-web.jpg" alt="" loading="lazy" decoding="async">
+        <figcaption data-i18n="visuals.accounting.documents"></figcaption>
+      </figure>
+      <figure class="acct-photo">
+        <img src="assets/hammer-money-web.jpg" alt="" loading="lazy" decoding="async">
+        <figcaption data-i18n="visuals.accounting.deadlines"></figcaption>
+      </figure>
+    </div>
   </section>
 
   <!-- Kontakt / Contact -->
@@ -227,8 +300,8 @@
         </div>
         <div style="margin-top: 24px">
           <figure class="sketch rv" style="aspect-ratio: 16 / 10">
-            <img src="assets/coffee-web.png" alt="" style="object-position: 70% 74%">
-            <div class="duo" aria-hidden="true"><img src="assets/coffee-web.png" alt="" style="object-position: 70% 74%"></div>
+            <img src="assets/coffee-vaping.svg" alt="" style="object-position: 70% 74%">
+            <div class="duo" aria-hidden="true"><img src="assets/coffee-vaping.svg" alt="" style="object-position: 70% 74%"></div>
             <span class="sketch-tip" data-tip></span>
           </figure>
         </div>
@@ -247,6 +320,20 @@
           <button type="button" class="btn btn-blue" data-form-again data-i18n="contact.form.again"></button>
         </div>
       </form>
+    </div>
+    <div class="wrap contact-band rv" aria-label="Contact visuals">
+      <figure class="mini-photo">
+        <img src="assets/coffee-wide-web.jpg" alt="" loading="lazy" decoding="async">
+        <figcaption data-i18n="visuals.contact.coffee"></figcaption>
+      </figure>
+      <figure class="mini-photo">
+        <img src="assets/bulb-handover-2-web.jpg" alt="" loading="lazy" decoding="async">
+        <figcaption data-i18n="visuals.contact.consultation"></figcaption>
+      </figure>
+      <figure class="mini-photo">
+        <img src="assets/phone-wide-web.jpg" alt="" loading="lazy" decoding="async">
+        <figcaption data-i18n="visuals.contact.message"></figcaption>
+      </figure>
     </div>
   </section>
 </main>

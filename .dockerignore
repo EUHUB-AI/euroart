@@ -1,0 +1,9 @@
+.git
+.github
+dist
+node_modules
+coverage
+.cache
+.parcel-cache
+.DS_Store
+*.log

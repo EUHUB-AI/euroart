@@ -1,0 +1,15 @@
+{
+  "name": "euroart-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run scripts/dev.ts",
+    "start": "bun run dev",
+    "build": "bun run scripts/build.ts",
+    "preview": "bun run scripts/dev.ts --root dist --port 4173"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  }
+}

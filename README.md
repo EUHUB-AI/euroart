@@ -2,7 +2,7 @@
 
 A one-page scrolling website for **EUROART**, a Slovak advertising agency working in computer graphics and publishing since 1997. The agency designs and produces promotional and informational print — leaflets, calendars, cycling maps, brochures, books and monographs — primarily for municipalities, towns, educational institutions, civic associations and micro-regions, and also offers accounting services.
 
-The site is a static build (plain HTML/CSS/JS, no framework, no build step) implemented from a [Claude Design](https://claude.ai/design) prototype. It is ready for any static host: Cloud Storage, GitHub Pages, Netlify, etc.
+The site is a static build (plain HTML/CSS/JS, no framework) implemented from a [Claude Design](https://claude.ai/design) prototype. It is runnable and buildable with Bun, and the generated `dist/` folder is ready for any static host: Cloud Storage, GitHub Pages, Netlify, etc.
 
 ## Goals
 
@@ -74,6 +74,8 @@ Only `data-theme` needs to change — every component reads the variables (`--bg
 | `js/content.js` | **All copy lives here** — `window.EUROART_I18N` with complete `sk` and `en` trees (nav, hero, about, services, offer incl. tabs and awards, accounting, contact incl. form strings, footer). Edit text here, not in the HTML. |
 | `js/main.js` | Behaviour: language toggle (persisted to `localStorage` as `euroart-lang`), i18n application, accordion/tabs/awards rendering from the content tree, contact-form sent-state, scroll reveal. No dependencies. |
 | `assets/` | Web-optimized imagery (see below). |
+| `scripts/dev.ts` | Bun-native static development server for the source tree or `dist/`. |
+| `scripts/build.ts` | Bun-native build script that recreates `dist/` from the deployable static files. |
 | `deploy/bootstrap-gcp.sh` | Interactive GCP deployment setup (see Deploying). |
 
 The design prototype was React-based; the production implementation deliberately re-creates the same visual output in dependency-free vanilla JS (~200 lines) since a one-page marketing site needs no framework runtime.
@@ -89,9 +91,7 @@ The design prototype was React-based; the production implementation deliberately
 
 All images live in `assets/`, downscaled to ≤1600 px and recompressed (60–110 KB each) from 6000×4000 originals.
 
-**Currently used on the page:** `cubes-web.png` (hero), `marionette-web.png` (O nás), `idea-web.png` (Služby), `phone-web.png` (Naša ponuka), `coffee-web.png` (Kontakt), `plane.png` (hero + form sent-state accent).
-
-**Available, not yet placed** (the wider 3:2 chalk-series shots): `brain-web.jpg`, `marionette-wide-web.jpg`, `cubes-wide-web.jpg`, `coffee-wide-web.jpg`, `hammer-money-web.jpg`, `bulb-handover-web.jpg`, `bulb-handover-2-web.jpg`, `ideas-web.jpg`, `phone-wide-web.jpg`, `graphs-web.jpg`, `money-web.jpg`, `money-2-web.jpg`, `globe-wide-web.jpg`.
+**Currently used on the page:** all core visual assets are placed across the hero, process strip, about visuals, service thumbnails, offer visuals, accounting grid and contact band: `brain-web.jpg`, `bulb-handover-web.jpg`, `bulb-handover-2-web.jpg`, `coffee-vaping.svg`, `coffee-web.png`, `coffee-wide-web.jpg`, `cubes-web.png`, `cubes-wide-web.jpg`, `globe-wide-web.jpg`, `graphs-web.jpg`, `hammer-money-web.jpg`, `idea-web.png`, `ideas-web.jpg`, `marionette-web.png`, `marionette-wide-web.jpg`, `money-web.jpg`, `money-2-web.jpg`, `phone-web.png`, `phone-wide-web.jpg` and `plane.png`.
 
 ### Accessibility
 
@@ -99,18 +99,32 @@ All images live in `assets/`, downscaled to ≤1600 px and recompressed (60–11
 - Keyboard-reachable interactive elements (real `<button>`/`<a>`), visible focus rings on form fields.
 - Reduced-motion support as described above; decorative images carry empty `alt`.
 
-## Run locally
+## Run And Build With Bun
 
-Open `index.html` directly, or serve the folder:
+Install Bun if needed, then run the source site locally:
 
 ```sh
-python3 -m http.server 8000
-# → http://localhost:8000
+bun i
+bun dev
+# -> http://localhost:3000
 ```
 
-(Serving is recommended — the language preference uses `localStorage`, which some browsers restrict on `file://`.)
+Build the deployable static site:
 
-## Deploying to GCP
+```sh
+bun run build
+```
+
+Preview the built `dist/` folder:
+
+```sh
+bun run preview
+# -> http://localhost:4173
+```
+
+Serving is recommended because the language preference uses `localStorage`, which some browsers restrict on `file://`.
+
+## Deploying to GCP Cloud Run
 
 Run the interactive bootstrap script:
 
@@ -118,7 +132,14 @@ Run the interactive bootstrap script:
 ./deploy/bootstrap-gcp.sh
 ```
 
-It asks for the path to your service-account JSON key (kept out of the repo; stored as the `GCP_SA_KEY` GitHub Actions secret), the GCP project, bucket name, region and deploy branch — then generates `.github/workflows/deploy-gcp.yml`, which syncs the site to a public Cloud Storage bucket on every push. The service account needs `roles/storage.admin`.
+It asks for the path to your service-account JSON key (kept out of the repo; stored as the `GCP_SA_KEY` GitHub Actions secret), the GCP project, Cloud Run service name, region, Artifact Registry repository and deploy branch. It then generates `.github/workflows/deploy-gcp.yml`, which builds the Bun static site into a container, pushes it to Artifact Registry, and deploys it to Cloud Run on every push.
+
+The deployment service account needs:
+
+- `roles/run.admin`
+- `roles/artifactregistry.admin`
+- `roles/serviceusage.serviceUsageAdmin`
+- `roles/iam.serviceAccountUser` on the Cloud Run runtime service account
 
 ## Known placeholders / pre-launch checklist
 

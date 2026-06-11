@@ -24,6 +24,29 @@
     return node;
   }
 
+  function imageNode(src, alt) {
+    var img = document.createElement("img");
+    img.src = src;
+    img.alt = alt || "";
+    img.loading = "lazy";
+    img.decoding = "async";
+    return img;
+  }
+
+  var SERVICE_IMAGES = [
+    "assets/ideas-web.jpg",
+    "assets/brain-web.jpg",
+    "assets/bulb-handover-2-web.jpg",
+    "assets/phone-wide-web.jpg",
+    "assets/cubes-wide-web.jpg"
+  ];
+
+  var OFFER_IMAGES = [
+    "assets/phone-wide-web.jpg",
+    "assets/bulb-handover-web.jpg",
+    "assets/globe-wide-web.jpg"
+  ];
+
   function renderServices(c) {
     var list = document.querySelector("[data-services]");
     list.innerHTML = "";
@@ -41,6 +64,9 @@
 
       var body = el("div", "svc-body");
       var bodyIn = el("div", "svc-body-in");
+      var thumb = el("figure", "svc-thumb");
+      thumb.appendChild(imageNode(SERVICE_IMAGES[i], item.name));
+      bodyIn.appendChild(thumb);
       item.p.forEach(function (p) { bodyIn.appendChild(el("p", null, p)); });
       body.appendChild(bodyIn);
 
@@ -58,7 +84,7 @@
         }
       });
 
-      body.style.maxHeight = i === 0 ? "640px" : "0px";
+      body.style.maxHeight = i === 0 ? "920px" : "0px";
       svc.appendChild(btn);
       svc.appendChild(body);
       list.appendChild(svc);
@@ -80,9 +106,25 @@
       box.appendChild(row);
     });
     box.classList.add("in");
+    renderOfferVisual(c, tabIndex);
   }
 
   var currentTab = 0;
+  function renderOfferVisual(c, tabIndex) {
+    var img = document.querySelector("[data-offer-visual-img]");
+    var imgDuo = document.querySelector("[data-offer-visual-duo]");
+    var label = document.querySelector("[data-offer-visual-label]");
+    if (!img || !imgDuo || !label) return;
+
+    var src = OFFER_IMAGES[tabIndex];
+    var alt = c.offer.tabs[tabIndex].name;
+    img.src = src;
+    img.alt = alt;
+    imgDuo.src = src;
+    imgDuo.alt = "";
+    label.textContent = alt;
+  }
+
   function renderTabs(c) {
     var tabs = document.querySelector("[data-tabs]");
     tabs.innerHTML = "";
